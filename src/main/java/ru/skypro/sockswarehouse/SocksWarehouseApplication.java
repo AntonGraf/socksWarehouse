@@ -1,11 +1,11 @@
 package ru.skypro.sockswarehouse;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan({"ru.skypro.controller","ru.skypro.service"})
 @SpringBootApplication
-@OpenAPIDefinition
 public class SocksWarehouseApplication {
 
     public static void main(String[] args) {
