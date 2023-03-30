@@ -1,0 +1,1 @@
+INSERT INTO state (name) VALUES ('выполнена'), ('отклонена');

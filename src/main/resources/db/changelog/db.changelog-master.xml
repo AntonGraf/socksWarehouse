@@ -33,4 +33,14 @@
         <tagDatabase tag="create_table_warehouse"/>
     </changeSet>
     <include file="v-1.0/05-create-table-warehouse.sql" relativeToChangelogFile="true"/>
+
+    <changeSet id="6" author="anton_graf">
+        <tagDatabase tag="insert_data_in_operation"/>
+    </changeSet>
+    <include file="v-1.0/data/06-insert-data-in-operation.sql" relativeToChangelogFile="true"/>
+
+    <changeSet id="7" author="anton_graf">
+        <tagDatabase tag="insert_data_in_state"/>
+    </changeSet>
+    <include file="v-1.0/data/07-insert-data-in-state.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
