@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 public class SocksDto {
 
     String color;
-    int cottonPart;
+    short cottonPart;
     int quantity;
 
 }

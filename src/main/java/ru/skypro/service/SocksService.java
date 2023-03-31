@@ -1,6 +1,8 @@
 package ru.skypro.service;
 
 import org.springframework.stereotype.Service;
+import ru.skypro.dto.SocksDto;
+import ru.skypro.entity.SocksEntity;
 import ru.skypro.repository.SocksRepository;
 
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -13,13 +15,34 @@ public class SocksService {
         this.socksRepository = socksRepository;
     }
 
-    public int getSocks(String color, String operation, int cottonPart) {
-        return color.length() + operation.length() + cottonPart;
+    public void income(SocksDto socksDto) {
+        if (checkCottonPartParameter(socksDto.getCottonPart()) || socksDto.getQuantity() < 0) {
+            throw new IllegalArgumentException("Не корректные значения");
+        }
+        SocksEntity socks = findSocksEntity(socksDto.getColor(), socksDto.getCottonPart());
+        socks.setQuantity(socks.getQuantity() + socksDto.getQuantity());
+        socksRepository.save(socks);
+    }
+
+    public void outcome(SocksDto socksDto) {
+        if (checkCottonPartParameter(socksDto.getCottonPart()) || socksDto.getQuantity() < 0) {
+            throw new IllegalArgumentException("Не корректные значения");
+        }
+
+        SocksEntity socks = socksRepository.findSocksEntityByColorAndCottonPart(socksDto.getColor(),
+                socksDto.getCottonPart()).orElseThrow(IllegalArgumentException::new);
+
+        if ((socks.getQuantity() - socksDto.getQuantity()) < 0) {
+            throw new IllegalArgumentException("Не корректные значения");
+        }
+
+        socks.setQuantity(socks.getQuantity() - socksDto.getQuantity());
+        socksRepository.save(socks);
     }
 
     public int getQuantitySocksByColorAndCottonPart(String color, String operation, short cottonPart) {
 
-        if (!checkCottonPartParameter(cottonPart)) {
+        if (checkCottonPartParameter(cottonPart)) {
             throw new IllegalArgumentException(cottonPart + " - не корректное значение процента хлопка");
         }
 
@@ -49,6 +72,21 @@ public class SocksService {
     }
 
     private boolean checkCottonPartParameter(short cottonPart) {
-        return (cottonPart >= 0 && cottonPart <= 100);
+        return (cottonPart < 0 || cottonPart > 100);
     }
+
+    private SocksEntity findSocksEntity(String color, short cottonPart) {
+        SocksEntity socks = socksRepository.findSocksEntityByColorAndCottonPart(color, cottonPart)
+                .orElse(new SocksEntity());
+
+        if (socks.getId() == 0) {
+            socks.setColor(color);
+            socks.setCottonPart(cottonPart);
+            socks.setQuantity(0);
+            return socksRepository.save(socks);
+        }
+
+        return socks;
+    }
+
 }

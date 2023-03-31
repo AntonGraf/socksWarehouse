@@ -28,12 +28,11 @@ public class SocksController {
 
     @PostMapping("/income")
     public void income(@RequestBody SocksDto socksDto) {
-
-
+        socksService.income(socksDto);
     }
 
     @PostMapping("/outcome")
     public void outcome(@RequestBody SocksDto socksDto) {
-
+        socksService.outcome(socksDto);
     }
 }

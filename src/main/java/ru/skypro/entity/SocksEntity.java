@@ -18,14 +18,11 @@ public class SocksEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    Integer id;
+    int id;
 
-//    @Column(name = "color")
     String color;
 
-//    @Column(name = "cottonpart")
-    Short cottonPart;
+    short cottonPart;
 
-//    @Column(name = "quantity")
-    Integer quantity;
+    int quantity;
 }
