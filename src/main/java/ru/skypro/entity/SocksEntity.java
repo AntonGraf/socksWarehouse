@@ -5,6 +5,9 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
+/**
+ * Сущность Носка
+ */
 @Getter
 @Setter
 @ToString
@@ -13,19 +16,17 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "socks")
 @Entity
-public class Socks {
+public class SocksEntity {
 
+    //идентификатор
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     int id;
-
-    @Column(name = "color")
+    //цвет
     String color;
-
-    @Column(name = "cottonpart")
+    //процент хлопка
     short cottonPart;
-
-    @Column(name = "quantity")
+    //количество на складе
     int quantity;
 }
