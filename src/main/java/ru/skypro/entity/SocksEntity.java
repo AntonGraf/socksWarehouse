@@ -13,19 +13,19 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "socks")
 @Entity
-public class Socks {
+public class SocksEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    int id;
+    Integer id;
 
-    @Column(name = "color")
+//    @Column(name = "color")
     String color;
 
-    @Column(name = "cottonpart")
-    short cottonPart;
+//    @Column(name = "cottonpart")
+    Short cottonPart;
 
-    @Column(name = "quantity")
-    int quantity;
+//    @Column(name = "quantity")
+    Integer quantity;
 }

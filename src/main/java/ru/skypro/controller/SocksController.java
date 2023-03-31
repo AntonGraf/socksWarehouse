@@ -19,11 +19,11 @@ public class SocksController {
 
     @GetMapping
     public ResponseEntity<Integer> getSocks(
-            @RequestParam(name = "color")  String color,
-            @RequestParam(name = "operation") String operation,
-            @RequestParam(name = "cottonPart") int cottonPart
+            @RequestParam(name = "color", defaultValue = "черные")  String color,
+            @RequestParam(name = "operation", defaultValue = "equal") String operation,
+            @RequestParam(name = "cottonPart", defaultValue = "100") short cottonPart
     ) {
-        return ResponseEntity.ok(socksService.getSocks(color, operation, cottonPart));
+        return ResponseEntity.ok(socksService.getQuantitySocksByColorAndCottonPart(color, operation, cottonPart));
     }
 
     @PostMapping("/income")
