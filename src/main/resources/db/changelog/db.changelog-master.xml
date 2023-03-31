@@ -8,8 +8,13 @@
     <preConditions>
         <dbms type="postgresql"/>
     </preConditions>
-<!--    <changeSet id="1" author="anton_graf">-->
-<!--        <tagDatabase tag="create_table_users"/>-->
-<!--    </changeSet>-->
-<!--    <include file="v-1.0/01-create-table-users.sql" relativeToChangelogFile="true"/>-->
+    <changeSet id="1" author="anton_graf">
+        <tagDatabase tag="create_table_socks"/>
+    </changeSet>
+    <include file="v-1.0/01-create-table-socks.sql" relativeToChangelogFile="true"/>
+
+    <changeSet id="2" author="anton_graf">
+        <tagDatabase tag="insert_data_into_table_socks"/>
+    </changeSet>
+    <include file="v-1.0/data/02-insert-data-into-table-socks.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
