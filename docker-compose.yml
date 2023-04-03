@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "warehouse"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - socks
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "user@mail.ru"
+      PGADMIN_DEFAULT_PASSWORD: "password"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: always
+    networks:
+      - socks
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+      - pgadmin
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    networks:
+      - socks
+volumes:
+  db:
+    driver: local
+networks:
+  socks:
+    driver: bridge
